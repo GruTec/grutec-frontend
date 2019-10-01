@@ -6,7 +6,7 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
-  base: 'localhost:8080',
+  base: '/',
   routes: [
     {
       path: '/authentication',
@@ -22,11 +22,36 @@ const router = new Router({
       component: () => import('./features/dashboard/Dashboard.vue'),
       meta: {
         plainLayout: false,
-        requiresAuth: true
+        requiresAuth: true,
       }
     }
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-// })
+router.beforeEach((to, from, next) => {
+  const token = ls.get('token')
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (token) {
+      next()
+    } else {
+      next({ name: 'authentication'})
+    }
+  } else {
+    if (token) {
+      next({ name: 'dashboard' })
+    } else {
+      next()
+    }
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const token = ls.get('token')
+  if (to.matched.some(record => record.meta.redirect)) {
+    next({ name: 'dashboard' })
+  } else {
+    next()
+  }
+})
+
+export default router

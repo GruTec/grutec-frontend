@@ -10,14 +10,16 @@
 
 <script>
 export default {
-  name: 'Dashboard',
+  name: 'dashboard',
 
   components: {
 
   },
 
   data () {
+    return {
 
+    }
   }
 }
 </script>

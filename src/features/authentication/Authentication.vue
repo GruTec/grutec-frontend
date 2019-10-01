@@ -47,6 +47,22 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-snackbar
+      v-model="snackbar"
+      right
+      :timeout="8000"
+      top
+      vertical
+      color="error"
+    >
+      {{ errorMessage }}
+      <v-btn
+        color="error"
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -60,15 +76,33 @@ export default {
       user: '',
       password: '',
       showPassword: false,
+      signingIn: false,
       formModel: true,
-      presentationTitle: "Grutec Search Engine",
-      presentationText: "A grutec constrói solução de busca inteligentes para o seu negócio."
+      snackbar: false,
+      errorMessage: ''
     }
   },
 
   methods: {
     login() {
+      if(!this.$refs.form.validate()) {
+        return
+      }
+      this.signingIn = true
 
+      this.$store.dispatch('retrieveToken', {
+        user: this.user,
+        password: this.password
+      })
+      .then(response => {
+        this.signingIn = false
+        this.$router.push({name: 'dashboard'})
+      })
+      .catch(error => {
+        this.signingIn = false
+        this.snackbar = true
+        this.errorMessage = 'As credenciais não batem com nenhum registro.'
+      })
     }
   }
 }

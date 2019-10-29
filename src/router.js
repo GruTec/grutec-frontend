@@ -21,8 +21,8 @@ const router = new Router({
       name: 'dashboard',
       component: () => import('./features/dashboard/Dashboard.vue'),
       meta: {
-        plainLayout: false,
-        requiresAuth: true,
+        plainLayout: true,
+        requiresAuth: true
       }
     }
   ]

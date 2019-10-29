@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Authentication/>
+    <router-view/>
   </v-app>
 </template>
 

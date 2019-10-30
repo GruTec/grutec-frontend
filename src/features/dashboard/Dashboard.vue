@@ -18,12 +18,6 @@ export default {
     Header,
     Perfil,
     Search
-  },
-
-  data () {
-    return {
-      
-    }
   }
 }
 </script>

@@ -1,19 +1,15 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-card-title>
-        {{"Testando"}}
-      </v-card-title>
-    </v-card>
-  </v-container>
+  <Header/>
 </template>
 
 <script>
+import Header from '../../components/layout/Header.vue';
+
 export default {
   name: 'dashboard',
 
   components: {
-
+    Header
   },
 
   data () {

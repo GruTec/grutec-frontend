@@ -17,11 +17,28 @@ const router = new Router({
       }
     },
     {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('./features/authentication/Signup.vue'),
+      meta: {
+        plainLayout: true
+      }
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('./features/dashboard/Dashboard.vue'),
       meta: {
         plainLayout: true,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: () => import('./features/authentication/Logout.vue'),
+      meta: {
+        plainLayout: false,
         requiresAuth: true
       }
     }

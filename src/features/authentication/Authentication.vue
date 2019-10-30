@@ -29,17 +29,16 @@
                   class="enterBtn"
                   @click="login"
                 >
-                  Entrar
-                  <template v-slot:loader>
-                    <span class="pr-3">Entrando</span>
-                    <v-progress-circular
-                      indeterminate
-                      size="16"
-                      width="2"
-                      color="#AAA"
-                    >
-                    </v-progress-circular>
-                  </template>
+                  Sign in
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn
+                  x-large
+                  color="primary"
+                  class="enterBtn"
+                  @click="signup"
+                >
+                  Sign up
                 </v-btn>
               </v-flex>
             </v-layout>
@@ -103,6 +102,10 @@ export default {
         this.snackbar = true
         this.errorMessage = 'As credenciais não batem com nenhum registro.'
       })
+    },
+
+    signup() {
+      this.$router.push({ name: 'signup'})
     }
   }
 }

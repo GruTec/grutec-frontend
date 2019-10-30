@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import ls from 'local-storage'
 import jwt_decode from 'jwt-decode';
+import { decode } from 'punycode';
 
 Vue.use(Vuex)
 
@@ -40,6 +41,9 @@ export default new Vuex.Store({
             let decoded = jwt_decode(token)
 
             ls.set('username', decoded.username)
+            ls.set('name', decoded.name)
+            ls.set('email', decoded.email)
+
             ls.set('token', token)
             context.commit('setToken', token)
             resolve(response)

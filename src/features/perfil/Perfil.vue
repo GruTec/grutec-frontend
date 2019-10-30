@@ -11,7 +11,8 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="headline">{{ username }}</v-list-item-title>
-              <v-list-item-subtitle>{{ "Welcome " + username}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ name }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-flex>
@@ -30,17 +31,21 @@ export default {
 
   data() {
     return {
-      username: ''
+      username: '',
+      name: '',
+      email: ''
     }
   },
 
   mounted() {
-    this.defineUsername()
+    this.defineProfileInformations()
   },
 
   methods: {
-    defineUsername() {
+    defineProfileInformations() {
       this.username = ls.get('username')
+      this.name = ls.get('name')
+      this.email = ls.get('email')
     }
   }
 }

@@ -54,7 +54,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         apiAuth.post('/v1/users', user)
           .then(response => {
-            context.commit('setCurrentUser', userStoraged)
             resolve(response)
           })
           .catch(error => {

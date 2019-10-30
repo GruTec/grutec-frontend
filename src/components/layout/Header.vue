@@ -4,11 +4,11 @@
       color="blue darken-2"
     >
       <v-card-actions>
-        <v-layout row wrap justify-end>
-          <v-flex shrink md1>
-            <v-spacer></v-spacer>
+        <v-layout column wrap align-end>
+          <v-flex>
             <v-btn 
               primary
+              right
               to="/logout"
             >
               {{ logoutText }}

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import ls from 'local-storage'
+import jwt_decode from 'jwt-decode';
 
 Vue.use(Vuex)
 
@@ -11,7 +12,7 @@ const apiAuth = axios.create({
 
 export default new Vuex.Store({
   state: {
-    token: ls.get('token') || null
+    token: ls.get('token') || null,
   },
 
   mutations: {
@@ -35,7 +36,10 @@ export default new Vuex.Store({
         apiAuth.post('/auth', {}, {auth})
           .then(response => {
             const token = response.data.token
+            
+            let decoded = jwt_decode(token)
 
+            ls.set('username', decoded.username)
             ls.set('token', token)
             context.commit('setToken', token)
             resolve(response)
@@ -50,6 +54,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         apiAuth.post('/v1/users', user)
           .then(response => {
+            context.commit('setCurrentUser', userStoraged)
             resolve(response)
           })
           .catch(error => {

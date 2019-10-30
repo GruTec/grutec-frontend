@@ -170,7 +170,10 @@ export default {
       this.comboValue = ''
     },
     verifyAuthentication() {
-
+      if(this.user === 'fiap' && this.password === 'mpsp') {
+        this.needAuth = false
+        this.comboBoxControl = false
+      }
     }
   }
 }

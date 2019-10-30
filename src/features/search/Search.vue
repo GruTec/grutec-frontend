@@ -131,7 +131,6 @@ export default {
       ],
       containsAuth: [
         'Arisp',
-        'Sivec'
       ],
       comboValue: '',
       needAuth: false,
@@ -159,6 +158,7 @@ export default {
     submit() {
       this.filteringSystemsToRequest()
       this.clearComboBox()
+      this.resetComboBox()
       // FETCH HERE
     },
     filteringSystemsToRequest() {
@@ -171,9 +171,17 @@ export default {
     },
     verifyAuthentication() {
       if(this.user === 'fiap' && this.password === 'mpsp') {
+        this.resetComboBox()
+      } else {
         this.needAuth = false
-        this.comboBoxControl = false
+        this.comboBoxControl = true
+        this.currentToAuth = ''
       }
+    },
+    resetComboBox() {
+      this.needAuth = false
+      this.comboBoxControl = false
+      this.currentToAuth = ''
     }
   }
 }

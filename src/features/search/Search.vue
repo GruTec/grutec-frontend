@@ -32,9 +32,10 @@
                     </v-combobox>
                   </v-col>
                   <v-layout row wrap justify-center align-center>
-                    <v-flex ml-5 mt-10>
+                    <v-flex ml-5 mr-5 mt-10>
                       <v-btn
                         large
+                        min-width="100%"
                         color="success"
                         @click="submit"
                       >
@@ -96,17 +97,17 @@ export default {
     },
     submit() {
       this.filteringSystemsToRequest()
+      this.clearComboBox()
       // FETCH HERE
     },
     filteringSystemsToRequest() {
       for (const system of this.comboValue) {
         this.systemModel[system] = true
       }
+    },
+    clearComboBox() {
+      this.comboValue = ''
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

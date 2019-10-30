@@ -34,7 +34,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         apiAuth.post('/auth', {}, {auth})
           .then(response => {
-            console.log(response)
             const token = response.data.token
 
             ls.set('token', token)
@@ -42,6 +41,19 @@ export default new Vuex.Store({
             resolve(response)
           })
           .catch(error => {
+            reject(error)
+          })
+      })
+    },
+
+    registerUser(context, user) {
+      return new Promise((resolve, reject) => {
+        apiAuth.post('/v1/users', user)
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            console.log(error)
             reject(error)
           })
       })

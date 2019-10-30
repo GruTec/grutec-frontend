@@ -23,21 +23,21 @@
                 <v-flex align-self-center>
                   <form>
                     <v-text-field
-                      v-model="name"
+                      v-model="username"
                       label="Username"
                       required
                     >
                     </v-text-field>
                     
                     <v-text-field
-                      v-model="email"
+                      v-model="password"
                       label="Password"
                       required
                     >
                     </v-text-field>
 
                     <v-text-field
-                      v-model="email"
+                      v-model="name"
                       label="Name"
                       required
                     >
@@ -52,7 +52,7 @@
 
                     <v-btn 
                       large 
-                      @click="submit"
+                      @click="registerUser"
                     >
                       Submit
                     </v-btn>
@@ -79,13 +79,35 @@ export default {
       password: '',
       name: '',
       email: '',
-      principalPhrase: 'Sign up now in Search Engine!'
     }
   },
 
   methods: {
     backToLogin() {
       this.$router.push({ name: 'authentication' })
+    },
+
+    registerUser() {
+      this.$store.dispatch('registerUser', {
+        username: this.username,
+        password: this.password,
+        name: this.name,
+        email: this.email
+      })
+      .then(response => {
+        this.cleanForm()
+        this.$router.push({ name: 'authentication' })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
+
+    cleanForm() {
+      this.username = ''
+      this.password = ''
+      this.name = ''
+      this.email = ''
     }
   }
 }

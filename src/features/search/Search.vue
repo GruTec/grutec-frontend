@@ -26,6 +26,7 @@
                       multiple
                       chips
                       required
+                      :disabled="comboBoxControl"
                       :value="comboValue"
                       @input="onUpdate"
                     >
@@ -36,11 +37,49 @@
                       <v-btn
                         large
                         min-width="100%"
-                        color="success"
+                        color="primary"
                         @click="submit"
                       >
                         Submit
                       </v-btn>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row wrap justify-center align-center>
+                    <v-flex px-3 mt-9>
+                      <v-card
+                        v-show="needAuth"
+                        height="310px"
+                      >
+                        <v-layout row wrap justify-center align-center>
+                          <v-flex px-3 ml-10 mr-10 mt-10>
+                            <v-form lazy-validation>
+                              <v-text-field
+                                label="Username"
+                                v-model="user"
+                                required
+                              >
+                              </v-text-field>
+
+                              <v-text-field
+                                label="Password"
+                                :type="showPassword ? 'text' : 'password'"
+                                v-model="password"
+                                required
+                              >
+                              </v-text-field>
+                              <v-flex px-3 mt-10>
+                                <v-btn 
+                                  large 
+                                  min-width="100%"
+                                  @click="verifyAuthentication"
+                                >
+                                  Authenticate
+                                </v-btn>
+                              </v-flex>
+                            </v-form>
+                          </v-flex>
+                        </v-layout>
+                      </v-card>
                     </v-flex>
                   </v-layout>
                 </v-form>
@@ -61,6 +100,9 @@ export default {
 
   data() {
     return {
+      showPassword: false,
+      user: '',
+      password: '',
       searchTitle: 'Perform your searches',
       searchSubtitle: 'Search all systems or choose specific systems',
       systemModel: {
@@ -87,13 +129,32 @@ export default {
         'Siel',
         'Sivec'
       ],
-      comboValue: ''
+      containsAuth: [
+        'Arisp',
+        'Sivec'
+      ],
+      comboValue: '',
+      needAuth: false,
+      currentToAuth: '',
+      comboBoxControl: false
     }
   },
 
   methods: {
     onUpdate($event) {
       this.comboValue = $event
+
+      for (const value of this.comboValue) {
+        if(this.containsAuth.includes(value)) {
+          this.currentToAuth = value
+          this.needAuth = true
+          this.comboBoxControl = true
+
+        } else {
+          this.currentToAuth = ''
+          this.needAuth = false
+        }
+      }
     },
     submit() {
       this.filteringSystemsToRequest()
@@ -107,6 +168,9 @@ export default {
     },
     clearComboBox() {
       this.comboValue = ''
+    },
+    verifyAuthentication() {
+
     }
   }
 }

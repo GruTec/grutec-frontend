@@ -10,9 +10,9 @@
             >
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="headline">{{ username }}</v-list-item-title>
-              <v-list-item-subtitle>{{ name }}</v-list-item-subtitle>
+              <v-list-item-title class="headline">{{ name }}</v-list-item-title>
               <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ username }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-flex>

@@ -27,7 +27,7 @@
                       chips
                       required
                       :value="comboValue"
-                      @input="onSend"
+                      @input="onUpdate"
                     >
                     </v-combobox>
                   </v-col>
@@ -90,18 +90,18 @@ export default {
     }
   },
 
-  mounted() {
-
-  },
-
   methods: {
-    onSend($event) {
-      console.info('update combo:', $event)
+    onUpdate($event) {
       this.comboValue = $event
     },
     submit() {
-      // make fetch here
-      console.log("ok")
+      this.filteringSystemsToRequest()
+      // FETCH HERE
+    },
+    filteringSystemsToRequest() {
+      for (const system of this.comboValue) {
+        this.systemModel[system] = true
+      }
     }
   }
 }

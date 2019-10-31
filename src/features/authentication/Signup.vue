@@ -30,6 +30,7 @@
                     </v-text-field>
                     
                     <v-text-field
+                      :type="showPassword ? 'text' : 'password'"
                       v-model="password"
                       label="Password"
                       required
@@ -75,6 +76,7 @@ export default {
 
   data() {
     return {
+      showPassword: false,
       username: '',
       password: '',
       name: '',

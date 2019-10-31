@@ -50,8 +50,21 @@
                         v-show="needAuth"
                         height="310px"
                       >
+                        <v-card
+                          height="50px"
+                          dark
+                        >
+                          <v-layout row wrap justify-center align-center>
+                            <v-flex mb-2>
+                              <v-card-title>
+                                {{ needAuthInfo }}
+                              </v-card-title>
+                            </v-flex>
+                          </v-layout>
+                        </v-card>
                         <v-layout row wrap justify-center align-center>
-                          <v-flex px-3 ml-10 mr-10 mt-10>
+                          <v-flex px-3 ml-10 mr-10 mt-3>
+                            
                             <v-form lazy-validation>
                               <v-text-field
                                 label="Username"
@@ -100,6 +113,7 @@ export default {
 
   data() {
     return {
+      needAuthInfo: 'This system needs authentication',
       showPassword: false,
       user: '',
       password: '',
